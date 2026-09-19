@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>단어스캐너 (WordScanner)</title>
+  <style>
+    :root { --bg: #121212; --card-bg: #1e1e1e; --text: #ffffff; --primary: #3b82f6; --success: #10b981; }
+    body { font-family: -apple-system, sans-serif; background: var(--bg); color: var(--text); margin: 0; padding: 0; display: flex; flex-direction: column; height: 100vh; }
+    header { padding: 16px; text-align: center; font-weight: 700; border-bottom: 1px solid #333; }
+    main { flex: 1; padding: 20px; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+    
+    .card { background: var(--card-bg); width: 100%; max-width: 350px; border-radius: 16px; padding: 24px; box-sizing: border-box; box-shadow: 0 10px 20px rgba(0,0,0,0.5); text-align: center; display: none; }
+    .word-title { font-size: 2.5rem; font-weight: bold; margin: 0 0 8px 0; }
+    .word-pronounce { color: #9ca3af; font-size: 1rem; margin-bottom: 16px; }
+    .word-trans { font-size: 1.25rem; color: var(--success); margin-bottom: 24px; }
+    .word-example { font-size: 0.9rem; color: #d1d5db; background: #2d2d2d; padding: 12px; border-radius: 8px; text-align: left; margin-bottom: 8px; }
+    
+    .btn { background: var(--primary); color: white; border: none; padding: 16px 24px; font-size: 1.1rem; border-radius: 12px; font-weight: bold; width: 100%; max-width: 350px; cursor: pointer; transition: 0.2s; }
+    .btn:active { transform: scale(0.98); }
+    #loader { display: none; color: #9ca3af; }
+    
+    /* Camera Input Styling */
+    .file-upload-wrapper { position: relative; width: 100%; max-width: 350px; }
+    .file-upload-wrapper input[type="file"] { position: absolute; left: 0; top: 0; opacity: 0; width: 100%; height: 100%; cursor: pointer; }
+  </style>
+</head>
+<body>
+  <header>WordScanner 📸</header>
+  <main>
+    <div id="capture-section" class="file-upload-wrapper">
+      <button class="btn">카메라로 단어 찍기</button>
+      <input type="file" accept="image/*" capture="environment" id="cameraInput">
+    </div>
+
+    <div id="loader">AI가 이미지를 해독하고 있습니다... (1~2초 소요)</div>
+
+    <div id="result-card" class="card">
+      <h1 class="word-title" id="r-word"></h1>
+      <div class="word-pronounce" id="r-pronounce"></div>
+      <div class="word-trans" id="r-trans"></div>
+      <div id="r-examples"></div>
+      <button class="btn" style="background:#10b981; margin-top:20px;" id="saveBtn">내 단어장에 저장 (SM-2)</button>
+    </div>
+  </main>
+  <script src="/app.js"></script>
+</body>
+</html>
